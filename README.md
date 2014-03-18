@@ -8,10 +8,10 @@
 
 rails g scaffold Greeting email:text content:text
 
-# config/routes.rb
+#####config/routes.rb
 root to: 'greeting#index'
 
-# config/environment.rb
+#####config/environment.rb
 ActionMailer::Base.smtp_settings = {
   :user_name => 'your_email@gmail.com',
   :password => 'your_password',
@@ -29,18 +29,18 @@ touch app/views/notifier/greeting_notification.text.erb
 
 (shortcut: rails g mailer Notifier)
 
-# app/mailers/notifier.rb
+##### app/mailers/notifier.rb
 class Notifier < ActionMailer::Base
   def greeting_notification(form_input)
     mail(to: "someone@gmail.com", from: form_input.email, subject: "New message from #{form_input.email}")
   end
 end
 
-# app/views/notifier/greeting_notification.text.erb
+##### app/views/notifier/greeting_notification.text.erb
 Message from <%= @greeting.email %>
 <%= @greeting.content %>
 
-# app/models/greeting.rb
+##### app/models/greeting.rb
 after_commit :send_notification
 def send_notification
   Notifier.greeting_notification(self).deliver
