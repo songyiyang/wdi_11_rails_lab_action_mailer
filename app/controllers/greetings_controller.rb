@@ -1,6 +1,6 @@
 class GreetingsController < ApplicationController
   before_action :set_greeting, only: [:show, :edit, :update, :destroy]
-
+  before_filter :authenticate_user!
   # GET /greetings
   # GET /greetings.json
   def index

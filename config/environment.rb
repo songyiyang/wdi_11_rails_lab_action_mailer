@@ -4,12 +4,15 @@ require File.expand_path('../application', __FILE__)
 # Initialize the Rails application.
 BooksAppWithMailer::Application.initialize!
 
-ActionMailer::Base.smtp_settings = {
-  :user_name => 'anna.tsykalova@gmail.com',
-  :password => 'Lyagushonok8',
-  :domain => 'whatever_or_your_actual_domain',
-  :address => 'smtp.gmail.com',
-  :port => 587,
-  :authentication => :plain,
-  :enable_starttls_auto => true
-}
+Pony.options = {
+      :via => :smtp,
+      :via_options => {
+        :address => 'smtp.sendgrid.net',
+        :port => '587',
+        :domain => 'heroku.com',
+        :user_name => ENV['SENDGRID_USERNAME'],
+        :password => ENV['SENDGRID_PASSWORD'],
+        :authentication => :plain,
+        :enable_starttls_auto => true
+      }
+    }
